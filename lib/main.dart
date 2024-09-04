@@ -83,76 +83,101 @@ class SigninScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          // Custom Painted Background
-          WavyBackgoundImage(),
-          // Centered Text
-          SigninFom(),
-        ],
+    return SafeArea(
+      child: Scaffold(
+        body: Stack(
+          children: [
+            // Custom Painted Background
+            WavyBackgoundImage(),
+            // Centered Text
+            SigninFom(),
+          ],
+        ),
       ),
     );
   }
 }
 
-class SigninFom extends StatelessWidget {
+class SigninFom extends StatefulWidget {
   const SigninFom({
     super.key,
   });
 
   @override
+  State<SigninFom> createState() => _SigninFomState();
+}
+
+class _SigninFomState extends State<SigninFom> {
+  bool loading = false;
+  @override
   Widget build(BuildContext context) {
-    return AnimatedSwitcher(
-      duration: const Duration(seconds: 10),
-      transitionBuilder: (child, animation) {
-        return ScaleTransition(scale: animation, child: child);
-      },
-      child: LayoutBuilder(builder: (context, cons) {
-        return Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: SizedBox(
-            width: cons.maxWidth,
-            height: cons.maxHeight,
-            child: Center(
-              child: SingleChildScrollView(
-                child: Form(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        "Giris Sehifesi",
-                        style: Theme.of(context).textTheme.titleMedium,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TextFormField(
-                          decoration: const InputDecoration(
-                              prefixIcon: Icon(Icons.account_circle)),
+    _setResetLoading();
+    return LayoutBuilder(builder: (context, cons) {
+      return Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: SizedBox(
+          width: cons.maxWidth,
+          height: cons.maxHeight,
+          child: Center(
+            child: loading
+                ? AnimatedSwitcher(
+                    duration: Durations.medium1,
+                    child: CircularProgressIndicator.adaptive(),
+                  )
+                : SingleChildScrollView(
+                    child: AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 800),
+                      transitionBuilder: (child, animation) {
+                        return ScaleTransition(
+                          scale: animation,
+                          child: child,
+                        );
+                      },
+                      child: Form(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              "Giris Sehifesi",
+                              style: Theme.of(context).textTheme.titleMedium,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: TextFormField(
+                                decoration: const InputDecoration(
+                                    prefixIcon: Icon(Icons.account_circle)),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: TextFormField(
+                                obscureText: true,
+                                decoration: const InputDecoration(
+                                    prefixIcon: Icon(Icons.password)),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: ElevatedButton(
+                                  onPressed: () {}, child: const Text("Giris")),
+                            )
+                          ],
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TextFormField(
-                          obscureText: true,
-                          decoration: const InputDecoration(
-                              prefixIcon: Icon(Icons.password)),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ElevatedButton(
-                            onPressed: () {}, child: const Text("Giris")),
-                      )
-                    ],
+                    ),
                   ),
-                ),
-              ),
-            ),
           ),
-        );
-      }),
-    );
+        ),
+      );
+    });
+  }
+
+  Future<Null> _setResetLoading() {
+    return Future.delayed(Duration(seconds: 10), () {
+      setState(() {
+        loading = !loading;
+      });
+    });
   }
 }
 
