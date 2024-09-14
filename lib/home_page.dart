@@ -115,8 +115,34 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        drawer: Drawer(
+          child: Column(
+            children: [
+              Align(
+                alignment: Alignment.topLeft,
+                child: Text(
+                  "Emeliyyatlar Merkezi",
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+              ),
+              ListTile(
+                leading: const Icon(Icons.message),
+                title: const Text("Contact Admin"),
+                onTap: () {
+                  print("Hello You are contacting admin...");
+                },
+              )
+            ],
+          ),
+        ),
         appBar: AppBar(
-          leading: const Icon(Icons.menu),
+          leading: Builder(builder: (context) {
+            return InkWell(
+                onTap: () {
+                  Scaffold.of(context).openDrawer();
+                },
+                child: const Icon(Icons.menu));
+          }),
 
           ///TODO: SUBJECT TO CHANGE
           title: const Text("Naftalan MMC"),
