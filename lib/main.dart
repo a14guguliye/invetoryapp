@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:inventoryapp/create_order.dart';
 import 'package:inventoryapp/home_page.dart';
 import 'package:inventoryapp/signin_screen.dart';
+import 'package:inventoryapp/success_invoice.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,10 +12,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: "/home",
+      initialRoute: "/create-order",
       routes: {
         '/signin': (context) => const SigninScreen(),
-        "/home": (context) => HomePage()
+        "/home": (context) => HomePage(),
+        "/create-order": (context) => const CreateOrderPage(),
+        "/success-invoice": (context) => SuccessInvoice()
       },
       debugShowCheckedModeBanner: false,
       theme: ThemeData(

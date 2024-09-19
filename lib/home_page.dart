@@ -179,14 +179,16 @@ class _HomePageState extends State<HomePage> {
                         ),
                   title: Text(invoices[index].number),
                   subtitle: Text(invoices[index].dateEntered),
-                  trailing: Icon(Icons.arrow_right),
+                  trailing: const Icon(Icons.arrow_right),
                 ),
               );
             }),
         floatingActionButton: FloatingActionButton(
             tooltip: "Yeni Sifaris",
             child: const Icon(Icons.add),
-            onPressed: () {}),
+            onPressed: () {
+              Navigator.of(context).pushNamed("/create-order");
+            }),
         bottomNavigationBar: NavigationBar(
             onDestinationSelected: (index) {
               setState(() {
