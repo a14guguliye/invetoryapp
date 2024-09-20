@@ -36,11 +36,11 @@ class _InvoiceConfirmationPageState extends State<InvoiceConfirmationPage> {
                                 .invoice.products[index].quantity
                                 .toString()),
                             title: Text(
-                                "${widget.invoice.products[index].name} ${widget.invoice.products[index].unit} (${widget.invoice.products[index].countInUnit})"),
+                                "${widget.invoice.products[index].p.name} ${widget.invoice.products[index].p.unit} (${widget.invoice.products[index].p.countInUnit})"),
                             subtitle: Text(
-                                "${widget.invoice.products[index].category} ${widget.invoice.products[index].subCategory}"),
+                                "${widget.invoice.products[index].p.category} ${widget.invoice.products[index].p.subCategory}"),
                             leading: Image.network(
-                              widget.invoice.products[index].image.toString(),
+                              widget.invoice.products[index].p.image.toString(),
                               errorBuilder: (context, _, __) {
                                 return const Icon(
                                     Icons.panorama_fisheye_outlined);
@@ -56,13 +56,13 @@ class _InvoiceConfirmationPageState extends State<InvoiceConfirmationPage> {
                                   onTap: () {
                                     setState(() {
                                       widget.invoice.addProductQuantity(
-                                          widget.invoice.products[index], 1);
+                                          widget.invoice.products[index].p, 1);
                                     });
                                   },
                                   onLongPress: () {
                                     setState(() {
                                       widget.invoice.addProductQuantity(
-                                          widget.invoice.products[index], -1);
+                                          widget.invoice.products[index].p, -1);
                                     });
                                   },
                                   child: const ActionChip(label: Text("+1")),
@@ -71,13 +71,13 @@ class _InvoiceConfirmationPageState extends State<InvoiceConfirmationPage> {
                                   onTap: () {
                                     setState(() {
                                       widget.invoice.addProductQuantity(
-                                          widget.invoice.products[index], 5);
+                                          widget.invoice.products[index].p, 5);
                                     });
                                   },
                                   onLongPress: () {
                                     setState(() {
                                       widget.invoice.addProductQuantity(
-                                          widget.invoice.products[index], -5);
+                                          widget.invoice.products[index].p, -5);
                                     });
                                   },
                                   child: const ActionChip(label: Text("+5")),
@@ -86,13 +86,14 @@ class _InvoiceConfirmationPageState extends State<InvoiceConfirmationPage> {
                                   onTap: () {
                                     setState(() {
                                       widget.invoice.addProductQuantity(
-                                          widget.invoice.products[index], 10);
+                                          widget.invoice.products[index].p, 10);
                                     });
                                   },
                                   onLongPress: () {
                                     setState(() {
                                       widget.invoice.addProductQuantity(
-                                          widget.invoice.products[index], -10);
+                                          widget.invoice.products[index].p,
+                                          -10);
                                     });
                                   },
                                   child: const ActionChip(label: Text("+10")),

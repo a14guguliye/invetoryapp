@@ -15,11 +15,15 @@ class Product {
 
   String? image;
 
+  Product(this.name, this.category, this.subCategory, this.barCode, this.unit,
+      this.countInUnit, this.image);
+}
+
+class ProductInvoice {
+  Product p;
   int quantity;
 
-  Product(this.name, this.category, this.subCategory, this.barCode, this.unit,
-      this.countInUnit, this.image,
-      {this.quantity = 0});
+  ProductInvoice(this.p, this.quantity);
 }
 
 List<Product> generateProducts() {
@@ -109,13 +113,13 @@ enum sub_category_names {
 }
 
 class Invoice {
-  List<Product> products = [];
+  List<ProductInvoice> products = [];
 
   Invoice();
 
   void addProduct(Product p) {
     if (!checkIfProductExists(p)) {
-      products.add(p);
+      products.add(ProductInvoice(p, 1));
     }
   }
 
@@ -123,7 +127,7 @@ class Invoice {
     bool existsFlag = false;
 
     products.forEach((e) {
-      if (e.barCode == p.barCode) {
+      if (e.p.barCode == p.barCode) {
         existsFlag = true;
       }
     });
@@ -133,8 +137,8 @@ class Invoice {
 
   void addProductQuantity(Product p, int quantity) {
     products.forEach((e) {
-      if (e.barCode == p.barCode) {
-        p.quantity += quantity;
+      if (e.p.barCode == p.barCode) {
+        e.quantity += quantity;
       }
     });
   }
