@@ -194,30 +194,34 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
           Container(
             color: Color(0xFFF5F5F5), // A light grey shade.
             height: 50,
-            child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: category_names.values
-                    .map((e) => Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: FilterChip(
-                              label: Text(e.name), onSelected: (e) {}),
-                        ))
-                    .toList()),
+            child: Center(
+              child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: category_names.values
+                      .map((e) => Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: FilterChip(
+                                label: Text(e.name), onSelected: (e) {}),
+                          ))
+                      .toList()),
+            ),
           ),
 
           //// SUB CATEGOY NAMES
           Container(
             color: Color(0xFFF5F5F5), // A light grey shade.
             height: 50,
-            child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: sub_category_names.values
-                    .map((e) => Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: FilterChip(
-                              label: Text(e.name), onSelected: (e) {}),
-                        ))
-                    .toList()),
+            child: Center(
+              child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: sub_category_names.values
+                      .map((e) => Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: FilterChip(
+                                label: Text(e.name), onSelected: (e) {}),
+                          ))
+                      .toList()),
+            ),
           ),
 
           /////products lists
